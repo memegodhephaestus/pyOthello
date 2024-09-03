@@ -111,38 +111,40 @@ class Board:
         """ Flips (capturates) the pieces of the given color in the given direction
         (1=North,2=Northeast...) from position. """
 
-        if direction == 1:
-            # north
-            row_inc = -1
-            col_inc = 0
-        elif direction == 2:
-            # northeast
-            row_inc = -1
-            col_inc = 1
-        elif direction == 3:
-            # east
-            row_inc = 0
-            col_inc = 1
-        elif direction == 4:
-            # southeast
-            row_inc = 1
-            col_inc = 1
-        elif direction == 5:
-            # south
-            row_inc = 1
-            col_inc = 0
-        elif direction == 6:
-            # southwest
-            row_inc = 1
-            col_inc = -1
-        elif direction == 7:
-            # west
-            row_inc = 0
-            col_inc = -1
-        elif direction == 8:
-            # northwest
-            row_inc = -1
-            col_inc = -1
+        # i mostly changed this cause i prefer match / case to long elif chains
+        match (direction):
+            case 1:
+                # north
+                row_inc = -1
+                col_inc = 0
+            case 2:
+                # northeast
+                row_inc = -1
+                col_inc = 1
+            case 3:
+                # east
+                row_inc = 0
+                col_inc = 1
+            case 4:
+                # southeast
+                row_inc = 1
+                col_inc = 1
+            case 5:
+                # south
+                row_inc = 1
+                col_inc = 0
+            case 6:
+                # southwest
+                row_inc = 1
+                col_inc = -1
+            case 7:
+                # west
+                row_inc = 0
+                col_inc = -1
+            case 8:
+                # northwest
+                row_inc = -1
+                col_inc = -1
 
         places = []     # pieces to flip
         i = position[0] + row_inc
@@ -234,7 +236,7 @@ class Board:
             for j in range(8):
                 if otherBoard.board[i][j] != self.board[i][j]:
                     diffBoard.board[i][j] = otherBoard.board[i][j]
-        return otherBoard
+        return diffBoard # originally was otherBoard, but that doesn't make sense to me
 
     def get_adjacent_count(self, color):
         """Return how many empty squares there are on the board adjacent to
